@@ -8,20 +8,22 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x=x;
     this.y=y;
+    this.speed=randomInt(1,15); //initialises random speed
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    this.x+=2;
-
+    
+    this.x+=this.speed;
+    
     if(this.withinBounds()===true){
         ctx.drawImage(Resources.get(this.sprite),this.x*dt,this.y);
     }
     else{
         this.x=2;
+        this.speed=randomInt(1,15);//produces a random speed unit within range dor the enemy to start over
     }
-    
 };
 
 Enemy.prototype.withinBounds=function(){
@@ -61,7 +63,8 @@ let Player= class {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies=[new Enemy(0,68), new Enemy(0,151), new Enemy(0,234)];
+// console.log(randomInt(0,300));
+let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
 let player= new Player;
 
 
@@ -81,5 +84,7 @@ document.addEventListener('keyup', function(e) {
 
 // Random int generator function
 // takes in the lower liomit and upper klimit and returns an int between those values
-let randomInt=(lowerLim,upperLim)=> Math.floor((Math.random()*(upperLim-lowerLim))+lowerLim);
+function randomInt(lowerLim,upperLim){
+    return Math.floor((Math.random()*(upperLim-lowerLim))+lowerLim);
+}
 
