@@ -8,7 +8,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x=x;
     this.y=y;
-    this.speed=randomInt(1,15); //initialises random speed
+    this.speed=randomInt(this.speedLim.lowerLim,this.speedLim.upperLim); //initialises random speed
 };
 
 // Update the enemy's position, required method for game
@@ -22,7 +22,8 @@ Enemy.prototype.update = function(dt) {
     }
     else{
         this.x=2;
-        this.speed=randomInt(1,15);//produces a random speed unit within range dor the enemy to start over
+        this.speed=randomInt(this.speedLim.lowerLim,this.speedLim.upperLim);//produces a random speed unit within range dor the enemy to start over
+        this.y=this.rows[randomInt(0,this.rows.length)]; // starts the enemy instance into a random row at the begining of boundary after raching the end of the boundary
     }
 };
 
@@ -39,6 +40,11 @@ Enemy.prototype.withinBounds=function(){
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+//the rows for the enemy class
+Enemy.prototype.rows=[68,151,234];
+// speed upper and lower limits
+Enemy.prototype.speedLim={lowerLim:3, upperLim:10};
 
 // Now write your own player class
 // This class requires an update(), render() and
