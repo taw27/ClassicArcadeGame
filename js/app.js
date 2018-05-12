@@ -67,6 +67,7 @@ let Player= class {
         this.x=x;
         this.y=y;
     }
+
     update(){
         if(this.x>=0 && this.x<=505 && this.y>=0 && this.y<=606){
             return true;
@@ -76,7 +77,6 @@ let Player= class {
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
-
     handleInput(allowedKeys){
         switch(allowedKeys){
             case 'left':
@@ -85,22 +85,39 @@ let Player= class {
             case 'right':
             this.goRight();
             break;
+            case 'up':
+            this.goUp();
+            break;
+            case 'down':
+            this.goDown();
         }
     }
-
     goLeft(){
         if(this.x>=101 && this.x<=505){
             this.x=grid[this.y/101][(this.x/101)-1].x;
             this.update();
            }
     }
-
     goRight(){
         if(this.x>=0 && this.x<=303){
             this.x=grid[this.y/101][(this.x/101)+1].x;
             this.update();
            }
     }
+    goDown(){
+        if(this.y>=0 && this.y<=303){
+            this.y=grid[this.y/101+1][(this.x/101)].y;
+            this.update();
+           }
+    }
+    goUp(){
+        if(this.y>=101 && this.y<=606){
+            this.y=grid[this.y/101-1][(this.x/101)].y;
+            this.update();
+           }
+    }
+
+
 }
 
 
