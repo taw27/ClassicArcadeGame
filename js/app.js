@@ -3,11 +3,12 @@ let grid=(function(){
     for(let i=0;i<6;i++){
         array[i]=[];
         for(let j=0;j<5;j++){
-            array[i][j]={x:i*(505/5), y:j*(606/6)};
+            array[i][j]={x:j*(505/5), y:i*(606/6)};
         }
     }
     return array;
 })();
+console.log(grid);
 // Enemies our player must avoid
 // console.log(grid);
 var Enemy = function(x,y) {
@@ -78,7 +79,9 @@ let Player= class {
 // Place the player object in a variable called player
 // console.log(randomInt(0,300));
 let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
-let player= new Player(300,200);
+console.log(grid[4][2]);
+// let player= new Player(300,200);
+let player= new Player(grid[3][2].x,grid[3][2].y);
 
 
 
