@@ -27,15 +27,14 @@ var Enemy = function(x,y) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    
+    this.collisionHandler();
     this.x+=this.speed;
     
     if(this.withinBounds()===true){
         ctx.drawImage(Resources.get(this.sprite),this.x*dt,this.y);
-        // this.collisionHandler();
     }
     else{
-        this.x=2;
+        this.x=0;
         this.speed=randomInt(this.speedLim.lowerLim,this.speedLim.upperLim);//produces a random speed unit within range dor the enemy to start over
         this.y=this.rows[randomInt(0,this.rows.length)]; // starts the enemy instance into a random row at the begining of boundary after raching the end of the boundary
     }
@@ -56,17 +55,16 @@ Enemy.prototype.render = function() {
 };
 
 //the rows for the enemy class
-Enemy.prototype.rows=[68,151,234];
+Enemy.prototype.rows=[tile.height,tile.height*2,tile.height*3];
 // speed upper and lower limits
-Enemy.prototype.speedLim={lowerLim:3, upperLim:10};
+Enemy.prototype.speedLim={lowerLim:2, upperLim:8};
 
-// Enemy.prototype.collisionHandler=function(){
-//     if(this.x>=player.x && this.x<=(player.x+101) && this.y>=player.y && this.y<=(player.y+101)){
-//         player.x=grid[4][2].x;
-//         player.y=grid[4][2].y;
-//         player.update();
-//     }
-// };
+Enemy.prototype.collisionHandler=function(){
+    if(this.x>=player.x && this.x<(player.x+tile.width) && this.y>=player.y && this.y<(player.y+tile.height)){
+        player.x=grid[5][2].x;
+        player.y=grid[5][2].y;
+    }
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -105,29 +103,21 @@ let Player= class {
     goLeft(){
         if(this.x>=tile.width*1 && this.x<=tile.width*5){
             this.x=grid[this.y/tile.height][(this.x/tile.width)-1].x;
-            this.update();
            }
     }
     goRight(){
         if(this.x>=0 && this.x<=tile.width*3){
             this.x=grid[this.y/tile.height][(this.x/tile.width)+1].x;
-            this.update();
            }
     }
     goDown(){
         if(this.y>=0 && this.y<=tile.height*4){
-            console.log(this.y);
             this.y=grid[this.y/tile.height+1][(this.x/tile.width)].y;
-            console.log(this.y);
-            this.update();
            }
     }
     goUp(){
         if(this.y>=tile.height*1 && this.y<=tile.height*5){
-            console.log(this.y);
             this.y=grid[(this.y/tile.height)-1][(this.x/tile.width)].y;
-            console.log(this.y);
-            this.update();
            }
     }
 }
@@ -136,7 +126,7 @@ let Player= class {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
+let allEnemies=[new Enemy(randomInt(0,300),tile.height), new Enemy(randomInt(0,300),tile.height*2), new Enemy(randomInt(0,300),tile.height*3)];//initialises enemy at random start position in x direction
 let player= new Player(grid[5][2].x,grid[5][2].y);
 
 
