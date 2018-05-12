@@ -31,6 +31,7 @@ Enemy.prototype.update = function(dt) {
     
     if(this.withinBounds()===true){
         ctx.drawImage(Resources.get(this.sprite),this.x*dt,this.y);
+        this.collisionHandler();
     }
     else{
         this.x=2;
@@ -58,6 +59,14 @@ Enemy.prototype.rows=[68,151,234];
 // speed upper and lower limits
 Enemy.prototype.speedLim={lowerLim:3, upperLim:10};
 
+Enemy.prototype.collisionHandler=function(){
+    if(this.x>=player.x && this.x<=(player.x+101) && this.y>=player.y && this.y<=(player.y+101)){
+        player.x=grid[4][2].x;
+        player.y=grid[4][2].y;
+        player.update();
+    }
+};
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -70,9 +79,9 @@ let Player= class {
 
     update(){
         if(this.x>=0 && this.x<=505 && this.y>=0 && this.y<=606){
-            return true;
+            ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+        
     }
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -116,18 +125,13 @@ let Player= class {
             this.update();
            }
     }
-
-
 }
 
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-// console.log(randomInt(0,300));
 let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
-// let player= new Player(300,200);
-console.log([grid[4][2].x]);
 let player= new Player(grid[4][2].x,grid[4][2].y);
 
 
@@ -146,7 +150,7 @@ document.addEventListener('keyup', function(e) {
 });
 
 // Random int generator function
-// takes in the lower liomit and upper klimit and returns an int between those values
+// takes in the lower liomit and upper limit and returns an int between those values
 function randomInt(lowerLim,upperLim){
     return Math.floor((Math.random()*(upperLim-lowerLim))+lowerLim);
 }
