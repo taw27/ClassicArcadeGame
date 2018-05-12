@@ -67,7 +67,11 @@ let Player= class {
         this.x=x;
         this.y=y;
     }
-    update(){}
+    update(){
+       if((this.x>=0 && this.x<=505) && (this.y>=0 && this.y<=606)){
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+       }
+    }
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
@@ -81,7 +85,7 @@ let Player= class {
 let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
 console.log(grid[4][2]);
 // let player= new Player(300,200);
-let player= new Player(grid[3][2].x,grid[3][2].y);
+let player= new Player(grid[4][2].x,grid[4][2].y);
 
 
 
