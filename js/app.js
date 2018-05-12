@@ -1,5 +1,5 @@
 let grid=(function(){
-    let array=[[],[]];
+    let array=[];
     for(let i=0;i<6;i++){
         array[i]=[];
         for(let j=0;j<5;j++){
@@ -68,12 +68,38 @@ let Player= class {
         this.y=y;
     }
     update(){
-       if((this.x>=0 && this.x<=505) && (this.y>=0 && this.y<=606)){
+        if(this.x>=0 && this.x<=505 && this.y>=0 && this.y<=606){
+            return true;
+        }
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-       }
     }
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(allowedKeys){
+        switch(allowedKeys){
+            case 'left':
+            this.goLeft();
+            break;
+            case 'right':
+            this.goRight();
+            break;
+        }
+    }
+
+    goLeft(){
+        if(this.x>=101 && this.x<=505){
+            this.x=grid[this.y/101][(this.x/101)-1].x;
+            this.update();
+           }
+    }
+
+    goRight(){
+        if(this.x>=0 && this.x<=303){
+            this.x=grid[this.y/101][(this.x/101)+1].x;
+            this.update();
+           }
     }
 }
 
@@ -83,8 +109,8 @@ let Player= class {
 // Place the player object in a variable called player
 // console.log(randomInt(0,300));
 let allEnemies=[new Enemy(randomInt(0,300),68), new Enemy(randomInt(0,300),151), new Enemy(randomInt(0,300),234)];//initialises enemy at random start position in x direction
-console.log(grid[4][2]);
 // let player= new Player(300,200);
+console.log([grid[4][2].x]);
 let player= new Player(grid[4][2].x,grid[4][2].y);
 
 
