@@ -3,6 +3,7 @@ body {
 }
 
 /*end game popup reused from my project memory game project*/
+/* modal styling*/
 .finish-popup {
 	display: none;  /*Hidden by default*/
 	position: fixed; /* Stay in place */
@@ -41,6 +42,7 @@ body {
 	align-self: center;
 }
 
+/*animates the drop down effect of the modal*/
 @keyframes animate-popup {
 	from { top:-300px; opacity: 0;}
 	to {top:0; opacity: 1;}
