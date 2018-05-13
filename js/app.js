@@ -57,7 +57,7 @@ Enemy.prototype.render = function() {
 //the rows for the enemy class
 Enemy.prototype.rows=[tile.height,tile.height*2,tile.height*3];
 // speed upper and lower limits
-Enemy.prototype.speedLim={lowerLim:2, upperLim:8};
+Enemy.prototype.speedLim={lowerLim:2, upperLim:10};
 
 Enemy.prototype.collisionHandler=function(){
     if(this.x>=player.x && this.x<(player.x+tile.width) && this.y>=player.y && this.y<(player.y+tile.height)){
@@ -74,6 +74,7 @@ let Player= class {
         this.sprite= 'images/char-boy.png';
         this.x=x;
         this.y=y;
+        this.reachedEnd=false;
     }
 
     update(){
@@ -101,27 +102,29 @@ let Player= class {
         }
     }
     goLeft(){
-        if(this.x>=tile.width*1 && this.x<=tile.width*5){
+        if(this.x>=tile.width*1 && this.x<=tile.width*5 && !this.reachedEnd){
             this.x=grid[this.y/tile.height][(this.x/tile.width)-1].x;
            }
     }
     goRight(){
-        if(this.x>=0 && this.x<=tile.width*3){
+        if(this.x>=0 && this.x<=tile.width*3  && !this.reachedEnd){
             this.x=grid[this.y/tile.height][(this.x/tile.width)+1].x;
            }
     }
     goDown(){
-        if(this.y>=0 && this.y<=tile.height*4){
+        if(this.y>=0 && this.y<=tile.height*4  && !this.reachedEnd){
             this.y=grid[this.y/tile.height+1][(this.x/tile.width)].y;
            }
     }
     goUp(){
-        if(this.y>=tile.height*1 && this.y<=tile.height*5){
+        if(this.y>=tile.height*1 && this.y<=tile.height*5  && !this.reachedEnd){
             this.y=grid[(this.y/tile.height)-1][(this.x/tile.width)].y;
-           }
+        }
+        if(this.y===grid[0][0].y){
+            gameEnd(); 
+        }
     }
 }
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -150,3 +153,13 @@ function randomInt(lowerLim,upperLim){
     return Math.floor((Math.random()*(upperLim-lowerLim))+lowerLim);
 }
 
+function gameEnd(){
+    player.reachedEnd=true;
+    document.querySelector(".finish-popup").style.display="block";
+    document.querySelector(".popup-restart").addEventListener('click', ()=>{
+        document.querySelector(".finish-popup").style.display="none";
+        player.x=grid[5][2].x;
+        player.y=grid[5][2].y;
+        player.reachedEnd=false;
+    });
+}
