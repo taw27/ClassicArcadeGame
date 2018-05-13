@@ -1,6 +1,33 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Table of Contents
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+* [Description](#description)
+* [Running Instructions](#running-instructions)
+* [Playing Instructions](#playing-instructions)
+
+## Description
+
+A replica od a classic arcade game where the player is required to avoid enemies and reach the end of the game
+
+ + _The player starts at the bottom mid of the game board_
+ + _3 Enemies appear at random at the stone section (row 2-4 from top) of the game board moving left to right_
+ + _Players use keyboard arrow keys to move across the game board_
+ + _The player restarts at initial position if there is a collision with the enemy_
+ + _Game ends when player reaches the river section(row 1 from top) without colliding with any enemy_
+
+## Running Instructions
+
+1. Download the project
+2. Open the index.html file
+
+## Playing Instructions
+
+_Notes: Player cannot mover outside of the game board and enemies speed is not constant_
+
+1. Use up arrow key to move up, left arrow key to move left, right arrow key to mover right and down arrow key to move down
+2. Carefully avoid the enemy bugs and move up the game board
+3. Reach the river section to complete the game
+4. Wait for a modal to appear to indicate game is completed
+5. Click the restart icon located in the bottom mid of the modal box to restart the game and play again
