@@ -58,7 +58,8 @@ Enemy.prototype.speedLim={lowerLim:2, upperLim:10};
 
 //Method that checks if collision occured and the sets the player to initial position if there was one
 Enemy.prototype.collisionHandler=function(){
-    if(this.x>=player.x && this.x<(player.x+tile.width) && this.y>=player.y && this.y<(player.y+tile.height)){ //logic to check if collision happened
+    if((this.x>=player.x && this.x<(player.x+tile.width) && this.y>=player.y && this.y<(player.y+tile.height))|| (this.x+60>=player.x 
+        && this.x+60<(player.x+tile.width) && this.y>=player.y && this.y<(player.y+tile.height))){ //logic to check if collision happened
         player.x=grid[5][2].x;
         player.y=grid[5][2].y;
     }
@@ -131,9 +132,21 @@ let Player= class {
             this.y=grid[(this.y/tile.height)-1][(this.x/tile.width)].y; //moves player a tile up
         }
         if(this.y===grid[0][0].y){ //checks if player has reached end of the game
-            gameEnd(); //invoked to handle end game logic
+            this.gameEnd(); //invoked to handle end game logic
         }
     }
+
+    //function that handles end game logic
+     gameEnd(){
+         this.reachedEnd=true; //sets players reachend property boolean to true
+         document.querySelector(".finish-popup").style.display="block"; //displays the end game modal
+         document.querySelector(".popup-restart").addEventListener('click', ()=>{ //adds event listener to restart button 
+            document.querySelector(".finish-popup").style.display="none"; //sets the modal display to none if button clicked
+            this.x=grid[5][2].x; // sets x coordinate of player to inital position
+            this.y=grid[5][2].y; //sets y coordinate of player to initial position
+            this.reachedEnd=false; //resets the endgame property to false
+        }); 
+}
 }
 
 // Now instantiate your objects.
@@ -163,14 +176,4 @@ function randomInt(lowerLim,upperLim){
     return Math.floor((Math.random()*(upperLim-lowerLim))+lowerLim);
 }
 
-//function that handles end game logic
-function gameEnd(){
-    player.reachedEnd=true; //sets players reachend property boolean to true
-    document.querySelector(".finish-popup").style.display="block"; //displays the end game modal
-    document.querySelector(".popup-restart").addEventListener('click', ()=>{ //adds event listener to restart button
-        document.querySelector(".finish-popup").style.display="none"; //sets the modal display to none if button clicked
-        player.x=grid[5][2].x; // sets x coordinate of player to inital position
-        player.y=grid[5][2].y; //sets y coordinate of player to initial position
-        player.reachedEnd=false; //resets the endgame property to false
-    }); 
-}
+
