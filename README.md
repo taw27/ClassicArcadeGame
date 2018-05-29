@@ -1,4 +1,4 @@
-frontend-nanodegree-arcade-game
+Arcade Game CLone (Udacity Front End Project 4)
 ===============================
 
 ## Table of Contents
