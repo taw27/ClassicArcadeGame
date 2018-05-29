@@ -19,8 +19,7 @@ A replica of a classic arcade game where the player is required to avoid enemies
 
 ## Running Instructions
 
-1. Download the project or visit <https://taw27.github.io/ClassicArcadeGame/>
-2. Open the index.html file
+1. Visit <https://taw27.github.io/ClassicArcadeGame/>
 
 ## Playing Instructions
 
