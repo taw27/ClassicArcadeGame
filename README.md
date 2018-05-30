@@ -9,13 +9,15 @@ Arcade Game CLone (Udacity Front End Project 4)
 
 ## Description
 
-A replica of a classic arcade game where the player is required to avoid enemies and reach the end of the game
+It is the fourth project in the Udacity Front End nanodegree. It is a replica of a classic arcade game where the player is required to avoid enemies and reach the end of the game
 
  + _The player starts at the bottom mid of the game board_
  + _3 Enemies appear at random at the stone section (row 2-4 from top) of the game board moving left to right_
  + _Players use keyboard arrow keys to move across the game board_
  + _The player restarts at initial position if there is a collision with the enemy_
  + _Game ends when player reaches the river section(row 1 from top) without colliding with any enemy_
+
+ _Disclaimer: The projects initiaL state included many functionality provided by Udacity. My contribution was to make the player and enemy classes, provide functinality to them, instantiate them, handle the logic behind the collisions and provide end game modal with restart functionality_
 
 ## Running Instructions
 
