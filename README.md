@@ -25,7 +25,7 @@ It is the fourth project in the Udacity Front End nanodegree. It is a replica of
 
 ## Playing Instructions
 
-_Notes: Player cannot mover outside of the game board and enemy speed is not constant_
+_Notes: Player cannot move outside of the game board and enemy speed is not constant_
 
 1. Use up arrow key to move up, left arrow key to move left, right arrow key to mover right and down arrow key to move down
 2. Carefully avoid the enemy bugs and move up the game board
